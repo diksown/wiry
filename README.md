@@ -3,6 +3,8 @@
 
 🤖 <b>wi</b>[kipedia summa]<b>ry</b> is a Telegram bot that is capable of making searches on Wikipedia and sending a short summary text about an article.
 
+Try it at [@wirybot](https://t.me/wirybot)!
+
 ### To-Do:
 - [ ] Change to a faster wikipedia API
 - [ ] Add inline support
