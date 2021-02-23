@@ -7,3 +7,4 @@
 - [ ] Change to a faster wikipedia API
 - [ ] Add inline support
 - [ ] Add image support
+- [ ] Add language choice
