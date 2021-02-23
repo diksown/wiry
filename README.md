@@ -5,6 +5,8 @@
 
 Try it at [@wirybot](https://t.me/wirybot)!
 
+***WARNING***: **kinda unstable for now. searches can take ~15s.**.
+
 ### To-Do:
 - [ ] Change to a faster wikipedia API
 - [ ] Add inline support
