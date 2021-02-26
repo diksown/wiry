@@ -1,11 +1,14 @@
-from telegram.ext import Updater, CommandHandler
-from telegram.ext import MessageHandler, Filters
+from telegram import InlineQueryResultArticle, ParseMode, InputTextMessageContent
+from telegram.ext import Updater, CommandHandler, MessageHandler, \
+		 InlineQueryHandler, Filters
+from telegram.utils.helpers import escape_markdown
+from uuid import uuid4
 import logging
 from wiki import short
 import time
 import os
 
-TOKEN = open('token').read()[:-1]
+TOKEN = os.environ['WIRY_KEY']
 
 def start(update, context):
 	s = "say something 2 me and I'll search that on wikipedia 4 you 😊"
@@ -22,16 +25,38 @@ def search(update, context):
 	logging.info(f"=== that \"{search}\" search took {end_time - start_time}s. ===")
 	update.message.reply_text(s)
 
+def inlinequery(update, context):
+	'''Handle the inline query.'''
+	query = update.inline_query.query
+	'''boilerplate code:
+		  
+    results = [
+        InlineQueryResultArticle(
+            id=uuid4(), title="Caps", input_message_content=InputTextMessageContent(query.upper())
+		)
+	]
+	'''
+	summary, page_title = short(query)
+	results = [
+		InlineQueryResultArticle(
+			id=uuid4(), title=page_title, input_message_content=InputTextMessageContent(summary)
+		)
+	]
+	update.inline_query.answer(results)
+
 def main():
 	logger = logging.getLogger(__name__)
 	logging.basicConfig(level=logging.INFO,
-			format 	= "%(asctime)s [%(levelname)s] %(message)s")
+			#format 	= "%(asctime)s [%(levelname)s] %(message)s")
+			#heroku already have a time log.
+			format 	= "%(message)s")
 
 	updater = Updater(token=TOKEN, use_context=True)
 	dp = updater.dispatcher
 
 	dp.add_handler(CommandHandler("start", start))
 	dp.add_handler(MessageHandler(Filters.text & (~Filters.command), search))
+	dp.add_handler(InlineQueryHandler(inlinequery))
 	
 	updater.start_polling()
 	logging.info("=== wiry is working hard to help you ===")

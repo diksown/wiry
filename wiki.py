@@ -1,23 +1,35 @@
 import wikipedia 
-import re
 
-wikipedia.set_lang("pt")
+wikipedia.set_lang("en")
 
 def results(search):
+	'''
+	Lists the pages on wikipedia related to the keyword `search`.
+	'''
 	return wikipedia.search(search)
 
-def summary(page_name):
-	return wikipedia.page(page_name).summary
-
-def lucky(search):
-	return summary(results(search)[0])
-
 def short(search):
-	temp_summary = lucky(search)
-	# not a perfect way to find a sentence, 
-	# but the best I could think of.
-	m = re.search("\. [A-Z]", temp_summary) 
-	if m:
-		return temp_summary[:m.start()+1]
+	'''
+	Searches the keyword `search` on wikipedia and returns a short summary of it.
+	'''
+	pages = results(search)
+
+	if len(pages) == 0:
+		return "I couldn't find anything for you 😭", ""
+
 	else:
-		return temp_summary
+		summary = ""
+		no_sentences = 1
+		remaining_tries = 3
+
+		while len(summary) < 30:
+			summary = wikipedia.summary(pages[0], 
+					auto_suggest=False, sentences=no_sentences)
+
+			no_sentences += 1
+			remaining_tries -= 1
+
+			if remaining_tries == 0:
+				break
+
+		return summary, pages[0]
