@@ -39,7 +39,7 @@ def inlinequery(update, context):
 	summary, page_title = short(query)
 	results = [
 		InlineQueryResultArticle(
-			id=uuid4(), title=page_title, input_message_content=InputTextMessageContent(summary)
+			id=uuid4(), title=page_title+" _"+summary[:10]+"..._", input_message_content=InputTextMessageContent(summary)
 		)
 	]
 	update.inline_query.answer(results)
