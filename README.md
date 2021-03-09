@@ -8,3 +8,5 @@ Try sending `@wirybot tetris effect` to your friends!
 ### To-Do:
 - [ ] Add image support
 - [ ] Add language choice
+- [ ] Add support for multiple results in query
+- [ ] Add a summary in the query results
