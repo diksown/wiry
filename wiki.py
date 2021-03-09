@@ -33,3 +33,10 @@ def short(search):
 				break
 
 		return summary, pages[0]
+
+def multiple_shorts(search):
+	results_list = results(search)
+	shorts = []
+	for i in results_list[:3]:
+		shorts.append(short(i))
+	return shorts

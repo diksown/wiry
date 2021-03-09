@@ -4,7 +4,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, \
 from telegram.utils.helpers import escape_markdown
 from uuid import uuid4
 import logging
-from wiki import short
+from wiki import *
 import time
 import os
 
@@ -36,12 +36,16 @@ def inlinequery(update, context):
 		)
 	]
 	'''
-	summary, page_title = short(query)
-	results = [
-		InlineQueryResultArticle(
-			id=uuid4(), title=page_title, description=" _"+summary[:20]+"..._", input_message_content=InputTextMessageContent(summary)
+	results = []
+	summaries = multiple_shorts(query)
+	for i in summaries:
+		summary, page_title = i
+		result = InlineQueryResultArticle(
+			id=uuid4(), title=page_title, description=summary[:40], 
+			input_message_content=InputTextMessageContent(summary)
 		)
-	]
+		results.append(result)
+
 	update.inline_query.answer(results)
 
 def main():
