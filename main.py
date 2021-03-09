@@ -41,7 +41,7 @@ def inlinequery(update, context):
 	for i in summaries:
 		summary, page_title = i
 		result = InlineQueryResultArticle(
-			id=uuid4(), title=page_title, description=summary[:40], 
+			id=uuid4(), title=page_title, description=summary[:40]+"...", 
 			input_message_content=InputTextMessageContent(summary)
 		)
 		results.append(result)
