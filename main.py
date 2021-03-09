@@ -20,7 +20,7 @@ def start(update, context):
 def search(update, context):
 	start_time = time.time()
 	search = update.message.text
-	s = short(search)
+	s = short(search)[1]
 	end_time = time.time()
 	logging.info(f"=== that \"{search}\" search took {end_time - start_time}s. ===")
 	update.message.reply_text(s)
