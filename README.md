@@ -3,9 +3,8 @@
 🤖 <b>wi</b>[kipedia summa]<b>ry</b> is a Telegram bot that is capable of making searches on Wikipedia and sending a short summary text about an article.
 
 
-![hmmm](https://github.com/diksown/wiry/blob/main/img/wiry_queens.png)
+![image](https://github.com/diksown/wiry/blob/main/img/wiry_queens.png)
+
+![image](https://github.com/diksown/wiry/blob/main/img/via_wiry.png)
 
 Try the inline mode sending `@wirybot tetris effect` to your friends, or talk directly in [wiry's chat](https://t.me/wirybot)!
-
-### To-Do:
-- [ ] Add language choice
